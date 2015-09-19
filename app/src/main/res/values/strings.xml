@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Task Manager</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name ="lbl_login">Login</string>
+    <string name ="lbl_password">Password</string>
+    <string name="lbl_SignIn">Sign In</string>
+    <string name = "msg_welcome">Welcome %s !</string>
+    <string name="txt_msg">Result %f</string>
+    <string name="lbl_peso">Heigth</string>>
+    <string name="lbl_altura">Weight</string>>
+    <string name="lbl_calcular">Result</string>
+    <string name="lbl_add">Add</string>
+    <string name="lbl_required">Required</string>
+    <string name="lbl_name">Name</string>
+    <string name="lbl_description">Descricao</string>
+    <string name="lbl_save">Save</string>>
+    <string name="msg_wecolme">welcome</string>>
+    <string name="msg_save_success">Success</string>
+    <string name="lbl_delete">Delete</string>
+    <string name="lbl_edit">Edit</string>
+    <string name="lbl_Success">Save Succes</string>
+    <string name="lbl_delete_succesful">Delete Succesful</string>
+    <string name="lbl_confirm">Confirm</string>
+    <string name="lbl_confirm_delete">Confirm Delete ?</string>
+    <string name="lbl_yes">yes</string>
+    <string name="lbl_no">No</string>>
+</resources>
