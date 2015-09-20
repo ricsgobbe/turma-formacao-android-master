@@ -29,6 +29,7 @@ public class LabelFormActivity extends AppCompatActivity {
     private EditText editName;
     private EditText editDesc;
     private Spinner spinerColor;
+    private Color cor;
     private Label label;
     public static final String PARAM_LABEL = "PARAM_LABEL";
 
@@ -70,13 +71,14 @@ public class LabelFormActivity extends AppCompatActivity {
         if(!FormHelp.validateRequired("erro", editName)){
             bindLabel();
             LabelBusinessServices.save(label);
-            Toast.makeText(LabelFormActivity.this, LabelRepository.getAll().toString(), Toast.LENGTH_LONG).show();
+            Toast.makeText(LabelFormActivity.this, label.toString(), Toast.LENGTH_LONG).show();
         }
     }
 
     private void bindLabel() {
         label.setName(editName.getText().toString());
         label.setDescription(editDesc.getText().toString());
+        label.setColor((Color) spinerColor.getAdapter().getItem(spinerColor.getSelectedItemPosition()));
     }
 
 

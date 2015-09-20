@@ -7,7 +7,7 @@ public class Label {
    private Long id;
    private String name;
    private String description;
-   //private String color;
+   private Color color;
 
 
     public Label() {
@@ -28,6 +28,7 @@ public class Label {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", color= "+ color.getHex() +
                 '}';
     }
 
@@ -48,6 +49,13 @@ public class Label {
     }
 
 
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
 }
 
 

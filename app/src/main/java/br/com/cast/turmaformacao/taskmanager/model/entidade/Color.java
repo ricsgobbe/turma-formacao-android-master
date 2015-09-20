@@ -39,7 +39,7 @@ public enum Color {
     public String getHex() {
         return hex;
     }
-
+/*Verifica se o valor passado por parametro existe na listade enuns, no caso colors vai conter os valores*/
     public static Color getInstancia(String hex){
         Color[] colors = values();
         for(Color c : colors){

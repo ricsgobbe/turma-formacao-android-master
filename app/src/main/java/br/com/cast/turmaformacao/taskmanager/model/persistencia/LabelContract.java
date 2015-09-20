@@ -6,6 +6,7 @@ import android.database.Cursor;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.cast.turmaformacao.taskmanager.model.entidade.Color;
 import br.com.cast.turmaformacao.taskmanager.model.entidade.Label;
 
 /**
@@ -32,7 +33,7 @@ public class LabelContract {
         create.append(ID + " INTEGER PRIMARY KEY, ");
         create.append(NAME + " TEXT NOT NULL, ");
         create.append(DESCRIPTION + " TEXT ");
-       // create.append(COLOR +" TEXT ");
+        create.append(COLOR +" TEXT ");
         create.append(" ); ");
 
         return create.toString();
@@ -45,7 +46,7 @@ public class LabelContract {
         values.put(LabelContract.ID, label.getId());
         values.put(LabelContract.NAME, label.getName());
         values.put(LabelContract.DESCRIPTION, label.getDescription());
-        //values.put(LabelContract.COLOR, label.getColor());
+        values.put(LabelContract.COLOR, label.getColor().getHex());
         return values;
     }
 
@@ -56,6 +57,7 @@ public class LabelContract {
             label.setId(cursor.getLong(cursor.getColumnIndex(LabelContract.ID)));
             label.setDescription(cursor.getString(cursor.getColumnIndex(LabelContract.DESCRIPTION)));
             label.setName(cursor.getString(cursor.getColumnIndex(LabelContract.NAME)));
+            label.setColor(Color.getInstancia(cursor.getString(cursor.getColumnIndex(LabelContract.COLOR))));
 
             return label;
         }
