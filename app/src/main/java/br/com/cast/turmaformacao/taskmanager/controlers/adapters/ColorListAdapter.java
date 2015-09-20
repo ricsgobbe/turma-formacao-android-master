@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import java.util.List;
 
+import br.com.cast.turmaformacao.taskmanager.R;
 import br.com.cast.turmaformacao.taskmanager.model.entidade.Color;
 
 /**
@@ -15,10 +17,10 @@ import br.com.cast.turmaformacao.taskmanager.model.entidade.Color;
 public class ColorListAdapter extends BaseAdapter {
 
      private Activity context;
-     private List<Color> colors;
+     private Color[] colors;
 
 
-    public ColorListAdapter(Activity context, List<Color> colors){
+    public ColorListAdapter(Activity context, Color[] colors){
         this.context = context;
         this.colors = colors;
     }
@@ -26,12 +28,12 @@ public class ColorListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return colors.size();
+        return colors.length;
     }
 
     @Override
     public Color getItem(int position) {
-        return colors.get(position);
+        return colors[position];
     }
 
     @Override
@@ -41,6 +43,14 @@ public class ColorListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+        Color color = getItem(position);
+
+        View colorView = context.getLayoutInflater().inflate(R.layout.list_item_color, parent, false);
+        int cor;
+        cor = android.graphics.Color.parseColor(color.getHex());
+
+        TextView background = (TextView) colorView.findViewById(R.id.list_colors);
+        background.setBackgroundColor(cor);
+        return colorView;
     }
 }

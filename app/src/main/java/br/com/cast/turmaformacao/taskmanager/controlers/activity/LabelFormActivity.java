@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.cast.turmaformacao.taskmanager.R;
+import br.com.cast.turmaformacao.taskmanager.controlers.adapters.ColorListAdapter;
 import br.com.cast.turmaformacao.taskmanager.model.entidade.Color;
 import br.com.cast.turmaformacao.taskmanager.model.entidade.Label;
 import br.com.cast.turmaformacao.taskmanager.model.persistencia.LabelContract;
@@ -35,7 +36,7 @@ public class LabelFormActivity extends AppCompatActivity {
         super.onCreate(savedInstaceState);
         setContentView(R.layout.activity_label_form);
 
-        //bindSpinner();
+        bindSpinner();
         iniLabel();
         bindTextName();
         bindTextDesc();
@@ -52,21 +53,25 @@ public class LabelFormActivity extends AppCompatActivity {
 
 
    private void bindSpinner() {
-       List<Color> colors = new ArrayList<>();
+       Color[] colors = Color.values();
        spinerColor = (Spinner)findViewById(R.id.spinnerColor);
-       colors.add(Color.getInstancia("#03A9F4"));
+       /*colors.add(Color.getInstancia("#03A9F4"));
        ArrayAdapter<Color> colorArrayAdapter = new ArrayAdapter<Color>(this, R.layout.list_item_color, colors);
-       spinerColor.setAdapter(colorArrayAdapter);
+       spinerColor.setAdapter(colorArrayAdapter);*/
+       ColorListAdapter colorAdapter = new ColorListAdapter(LabelFormActivity.this, colors);
+       spinerColor.setAdapter(colorAdapter);
+
+
     }
 
 
 
     private void onMenuAddClick() {
-        //if(!FormHelp.validateRequired("erro", editName)){
+        if(!FormHelp.validateRequired("erro", editName)){
             bindLabel();
             LabelBusinessServices.save(label);
             Toast.makeText(LabelFormActivity.this, LabelRepository.getAll().toString(), Toast.LENGTH_LONG).show();
-        //}
+        }
     }
 
     private void bindLabel() {
