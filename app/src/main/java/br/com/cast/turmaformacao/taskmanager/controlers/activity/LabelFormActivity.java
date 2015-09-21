@@ -1,10 +1,13 @@
 package br.com.cast.turmaformacao.taskmanager.controlers.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -28,8 +31,7 @@ import br.com.cast.turmaformacao.taskmanager.util.FormHelp;
 public class LabelFormActivity extends AppCompatActivity {
     private EditText editName;
     private EditText editDesc;
-    private Spinner spinerColor;
-    private Color cor;
+    private View viewColor;
     private Label label;
     public static final String PARAM_LABEL = "PARAM_LABEL";
 
@@ -37,7 +39,7 @@ public class LabelFormActivity extends AppCompatActivity {
         super.onCreate(savedInstaceState);
         setContentView(R.layout.activity_label_form);
 
-        bindSpinner();
+        bindView();
         iniLabel();
         bindTextName();
         bindTextDesc();
@@ -53,18 +55,45 @@ public class LabelFormActivity extends AppCompatActivity {
 
 
 
-   private void bindSpinner() {
-       Color[] colors = Color.values();
-       spinerColor = (Spinner)findViewById(R.id.spinnerColor);
+   private void bindView() {
+       viewColor = findViewById(R.id.view_color);
        /*colors.add(Color.getInstancia("#03A9F4"));
        ArrayAdapter<Color> colorArrayAdapter = new ArrayAdapter<Color>(this, R.layout.list_item_color, colors);
        spinerColor.setAdapter(colorArrayAdapter);*/
-       ColorListAdapter colorAdapter = new ColorListAdapter(LabelFormActivity.this, colors);
-       spinerColor.setAdapter(colorAdapter);
+
+       viewColor.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(LabelFormActivity.this);
+               final ColorListAdapter colorAdapter = new ColorListAdapter(LabelFormActivity.this, Color.values());
+               dialogBuilder.setAdapter(colorAdapter, new DialogInterface.OnClickListener() {
+                   @Override
+                   public void onClick(DialogInterface dialog, int which) {
+                       updateColor(colorAdapter.getItem(which));
+                   }
+               }).setTitle("Selecione a cor ").setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                   @Override
+                   public void onClick(DialogInterface dialog, int which) {
+                       dialog.cancel();
+                   }
+               }).show();
+
+           }
+       });
+
+
+
+      /* ColorListAdapter colorAdapter = new ColorListAdapter(LabelFormActivity.this, colors);
+       spinerColor.setAdapter(colorAdapter);*/
 
 
     }
 
+    private void updateColor(Color item) {
+        viewColor.setBackgroundColor(android.graphics.Color.parseColor(item.getHex()));
+        label.setColor(item);
+
+    }
 
 
     private void onMenuAddClick() {
@@ -78,7 +107,6 @@ public class LabelFormActivity extends AppCompatActivity {
     private void bindLabel() {
         label.setName(editName.getText().toString());
         label.setDescription(editDesc.getText().toString());
-        label.setColor((Color) spinerColor.getAdapter().getItem(spinerColor.getSelectedItemPosition()));
     }
 
 

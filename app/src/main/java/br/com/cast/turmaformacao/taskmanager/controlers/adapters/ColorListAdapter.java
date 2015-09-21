@@ -49,8 +49,8 @@ public class ColorListAdapter extends BaseAdapter {
         int cor;
         cor = android.graphics.Color.parseColor(color.getHex());
 
-        TextView background = (TextView) colorView.findViewById(R.id.list_colors);
-        background.setBackgroundColor(cor);
+        colorView.findViewById(R.id.viewColor);
+        colorView.setBackgroundColor(cor);
         return colorView;
     }
 }

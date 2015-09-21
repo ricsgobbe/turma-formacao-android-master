@@ -44,8 +44,8 @@ public class LabelListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = context.getLayoutInflater().inflate(R.layout.list_item_color, parent, false);
-        View viewById =  view.findViewById(R.id.list_colors);
+        //View viewById =  view.findViewById(R.id.list_colors);
 
-        return viewById;
+        return view;
     }
 }
