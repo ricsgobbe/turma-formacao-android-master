@@ -3,18 +3,18 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/taskListId"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="2"
-        android:gravity="center"/>
+
     <TextView
         android:id="@+id/taskListNome"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="8"
+        android:gravity="center"/>
+    <View
+        android:id="@+id/viewTarefa"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
         android:gravity="start|center"/>
-
 
 </LinearLayout>

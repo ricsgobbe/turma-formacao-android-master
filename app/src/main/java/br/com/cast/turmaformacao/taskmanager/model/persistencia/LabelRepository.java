@@ -17,13 +17,13 @@ public class LabelRepository {
         super();
     }
 
-    public static void save(Label label){
+    public static void save(Label label) {
         /*1-Qual � o banco de dados "context"*/
         /*2- getInstance retorna um objeto databasehelper, semelhante a uma factory method*/
-        DatabaseHelper databaseHelper =DatabaseHelper.getInstance();
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
         ContentValues values = LabelContract.getContentValues(label);
-        if(label.getId() == null) {
+        if (label.getId() == null) {
         /*Passando por parametro o task, onde o metodo contentValues vai retornar os valores do objeto */
             db.insert(LabelContract.TABLE, null, LabelContract.getContentValues(label));
         } else {
@@ -36,8 +36,8 @@ public class LabelRepository {
 
     }
 
-    public static List<Label> getAll(){
-        DatabaseHelper databaseHelper =DatabaseHelper.getInstance();
+    public static List<Label> getAll() {
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
 
 
@@ -48,8 +48,8 @@ public class LabelRepository {
         return labels;
     }
 
-    public static void delete(long id){
-        DatabaseHelper databaseHelper =DatabaseHelper.getInstance();
+    public static void delete(long id) {
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
 
         String where = LabelContract.ID + " = ? ";

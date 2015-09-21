@@ -25,5 +25,6 @@
     <string name="lbl_confirm">Confirm</string>
     <string name="lbl_confirm_delete">Confirm Delete ?</string>
     <string name="lbl_yes">yes</string>
-    <string name="lbl_no">No</string>>
+    <string name="lbl_no">No</string>
+    <string name="string_addTask">Adicionar</string>>
 </resources>

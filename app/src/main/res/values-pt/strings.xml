@@ -24,5 +24,6 @@
     <string name="lbl_delete_succesful">Delete Succesful</string>
     <string name="lbl_confirm">Confirmar</string>
     <string name="lbl_confirm_delete">Deseja excluir ?</string>>
-    <string name="lbl_yes">yes</string>>
+    <string name="lbl_yes">yes</string>
+    <string name="string_addTask">Adicionar</string>>
 </resources>

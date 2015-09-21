@@ -100,7 +100,7 @@ public class LabelFormActivity extends AppCompatActivity {
         if(!FormHelp.validateRequired("erro", editName)){
             bindLabel();
             LabelBusinessServices.save(label);
-            Toast.makeText(LabelFormActivity.this, label.toString(), Toast.LENGTH_LONG).show();
+            finish();
         }
     }
 

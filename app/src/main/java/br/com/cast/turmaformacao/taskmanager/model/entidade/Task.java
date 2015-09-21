@@ -8,19 +8,18 @@ import java.io.Serializable;
 /**
  * Created by Administrador on 15/09/2015.
  */
-public class Task implements Parcelable{
-/*serializa a classe, permitindo passar bit a bit*/
-  private Long id;
-  private String nome;
-  private String description;
+public class Task implements Parcelable {
+    /*serializa a classe, permitindo passar bit a bit*/
+    private Long id;
+    private String nome;
+    private String description;
 
 
-
-    public Task(){
+    public Task() {
         super();
     }
 
-    public Task(Parcel imp){
+    public Task(Parcel imp) {
         super();
         readFromParcel(imp);
     }
@@ -89,26 +88,26 @@ public class Task implements Parcelable{
     public int describeContents() {
         return 0;
     }
-/*Escrita do objeto para o parcelable !*/
+
+    /*Escrita do objeto para o parcelable !*/
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(id == null ? -1 : id);
-        dest.writeString(nome == null ? " " : nome);
-        dest.writeString(description == null ? " " : description);
+        dest.writeString(nome == null ? "" : nome);
+        dest.writeString(description == null ? "" : description);
     }
 
     /*retorna um void readFromPaRcel, deve ser colocado na mesma posicao qqd foi escrito, pouis ele sabe a posicao, apenas*/
-    public void readFromParcel(Parcel imp){
+    public void readFromParcel(Parcel imp) {
         id = imp.readLong();
-        id = id  == null ? -1 : id;
+        id = id == null ? -1 : id;
 
         nome = imp.readString();
         description = imp.readString();
     }
 
     /*cria ou um array de task ou um task*/
-    public static final Parcelable.Creator<Task> CREATOR = new Parcelable.Creator<Task>(){
-
+    public static final Parcelable.Creator<Task> CREATOR = new Parcelable.Creator<Task>() {
 
         @Override
         public Task createFromParcel(Parcel source) {

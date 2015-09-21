@@ -43,9 +43,18 @@ public class LabelListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = context.getLayoutInflater().inflate(R.layout.list_item_color, parent, false);
+        View labelListView = context.getLayoutInflater().inflate(R.layout.list_item_label, parent, false);
+        Label label = getItem(position);
+
+        TextView textViewTarefa = (TextView)labelListView.findViewById(R.id.taskListNome);
+        textViewTarefa.setText(label.getName().toString());
+
+        View tarefa = labelListView.findViewById(R.id.viewTarefa);
+        tarefa.setBackgroundColor(android.graphics.Color.parseColor(label.getColor().getHex()));
+
+
         //View viewById =  view.findViewById(R.id.list_colors);
 
-        return view;
+        return labelListView;
     }
 }

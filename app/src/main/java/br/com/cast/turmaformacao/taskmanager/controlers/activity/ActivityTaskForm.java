@@ -3,13 +3,23 @@ package br.com.cast.turmaformacao.taskmanager.controlers.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.List;
+
 import br.com.cast.turmaformacao.taskmanager.R;
+import br.com.cast.turmaformacao.taskmanager.controlers.adapters.ColorListAdapter;
+import br.com.cast.turmaformacao.taskmanager.controlers.adapters.LabelListAdapter;
+import br.com.cast.turmaformacao.taskmanager.model.entidade.Label;
 import br.com.cast.turmaformacao.taskmanager.model.entidade.Task;
+import br.com.cast.turmaformacao.taskmanager.model.servicos.LabelBusinessServices;
 import br.com.cast.turmaformacao.taskmanager.model.servicos.TaskBusinessServices;
 import br.com.cast.turmaformacao.taskmanager.util.FormHelp;
 
@@ -22,48 +32,87 @@ public class ActivityTaskForm extends AppCompatActivity {
     public static final String PARAM_TASK = "PARAM_TASK";
     private EditText editName;
     private EditText editDesc;
-    private Button button;
+    private Button buttonLabel;
+    private Spinner spinner;
     private Task task;
 
-    protected void onCreate(Bundle saveInstanceState){
+    protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_task_form);
 
         iniTask();
+        bindButton();
         bindTextName();
         bindTextDesc();
-        bindButtonSave();
+        bindSpinner();
+
+    }
+
+    @Override
+    protected void onResume() {
+        update();
+        super.onResume();
+
+    }
+
+    private void update() {
+        List<Label> labels = LabelBusinessServices.findAll();
+        LabelListAdapter labelAdapter = new LabelListAdapter(ActivityTaskForm.this, labels);
+        spinner.setAdapter(labelAdapter);
+        labelAdapter.notifyDataSetChanged();
+    }
+
+    private void bindSpinner() {
+        List<Label> label = LabelBusinessServices.findAll();
+        spinner = (Spinner) findViewById(R.id.spinnerTaskForm);
+        spinner.setAdapter(new LabelListAdapter(ActivityTaskForm.this, label));
+
+    }
+
+    private void bindButton() {
+        buttonLabel = (Button) findViewById(R.id.button_taskForm_label);
+        buttonLabel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToLabelForm = new Intent(ActivityTaskForm.this, LabelFormActivity.class);
+                startActivity(goToLabelForm);
+            }
+        });
     }
 
     private void iniTask() {
         Bundle extras = getIntent().getExtras();
-        if(extras != null) {
-            this.task = (Task) getIntent().getExtras().getParcelable(PARAM_TASK);
+        if (extras != null) {
+            this.task = getIntent().getExtras().getParcelable(PARAM_TASK);
         }
         this.task = this.task == null ? new Task() : task;
     }
 
-    private void bindButtonSave() {
-        button = (Button) findViewById(R.id.btnSave);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                String msg = ActivityTaskForm.this.getString(R.string.lbl_required);
-               if(!FormHelp.validateRequired(msg, editName) ) {
-                   bindTask();
+    private void onMenuAdd() {
+        String msg = ActivityTaskForm.this.getString(R.string.lbl_required);
+        if (!FormHelp.validateRequired(msg, editName)) {
+            bindTask();
                    /*Por manipular arquivo, deve-se usar o getApplication, pq se a activity morrer, o conteudo estara vivo
                    * pois ela serve para todo o ciclo de vida do programa*/
 
-                   TaskBusinessServices.save(task);
-                   Toast.makeText(ActivityTaskForm.this, R.string.msg_save_success, Toast.LENGTH_LONG).show();
-                   ActivityTaskForm.this.finish();
-               }
-            }
+            TaskBusinessServices.save(task);
+            Toast.makeText(ActivityTaskForm.this, R.string.msg_save_success, Toast.LENGTH_LONG).show();
+            ActivityTaskForm.this.finish();
+        }
+    }
 
-            private void bindTask() {
-                task.setNome(editName.getText().toString());
-                task.setDescription(editDesc.getText().toString());
-            }
-        });
+    private void bindTask() {
+        task.setNome(editName.getText().toString());
+        task.setDescription(editDesc.getText().toString());
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_addTask:
+                onMenuAdd();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
@@ -75,5 +124,11 @@ public class ActivityTaskForm extends AppCompatActivity {
     private void bindTextName() {
         editName = (EditText) findViewById(R.id.textNome);
         editName.setText(task.getNome() == null ? "" : task.getNome());
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_option_task_form, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }

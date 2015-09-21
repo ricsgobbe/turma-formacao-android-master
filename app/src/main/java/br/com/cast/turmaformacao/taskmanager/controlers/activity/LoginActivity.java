@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         editButton = (Button) findViewById(R.id.editButtonLogin);
         editButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, LabelFormActivity.class);
+                Intent intent = new Intent(LoginActivity.this, TaskListActivity.class);
                 startActivity(intent);
                 finish();
             }
