@@ -53,8 +53,8 @@ public class TaskListAdapter extends BaseAdapter {
         Task task = getItem(position);
         View taskListView = contexto.getLayoutInflater().inflate(R.layout.list_item_task, parent, false);
 
-        TextView textViewId = (TextView)taskListView.findViewById(R.id.taskListId);
-        textViewId.setText(task.getId().toString());
+        View color = taskListView.findViewById(R.id.viewTaskColor);
+        color.setBackgroundColor(android.graphics.Color.parseColor(task.getLabel().getColor().getHex()));
 
         TextView textViewNome = (TextView)taskListView.findViewById(R.id.taskListNome);
         textViewNome.setText(task.getNome().toString());

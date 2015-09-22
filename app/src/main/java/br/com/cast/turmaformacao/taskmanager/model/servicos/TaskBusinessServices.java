@@ -7,6 +7,7 @@ import java.util.List;
 
 import br.com.cast.turmaformacao.taskmanager.controlers.adapters.TaskListAdapter;
 import br.com.cast.turmaformacao.taskmanager.model.entidade.Task;
+import br.com.cast.turmaformacao.taskmanager.model.persistencia.LabelRepository;
 import br.com.cast.turmaformacao.taskmanager.model.persistencia.TaskRepository;
 
 /**
@@ -19,7 +20,12 @@ public final class TaskBusinessServices {
     }
 
     public static List<Task> findAll(){
-        return TaskRepository.getAll();
+
+        List<Task> tasks = TaskRepository.getAll();
+        for(Task task : tasks){
+            task.setLabel(LabelRepository.getById(task.getLabel().getId()));
+        }
+        return tasks;
     }
 
     public static void save(Task task){

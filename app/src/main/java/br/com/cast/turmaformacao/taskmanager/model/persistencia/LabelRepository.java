@@ -75,4 +75,17 @@ public class LabelRepository {
     }
 
 
+    public static Label getById(Long id) {
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
+        SQLiteDatabase db = databaseHelper.getReadableDatabase();
+
+        String where = LabelContract.ID + " = ? ";
+        String[] params = {String.valueOf(id)};
+        Cursor cursor = db.query(LabelContract.TABLE, LabelContract.COLUNSLABEL, where, params, null, null, null);
+        Label label = LabelContract.getLabel(cursor);
+
+        databaseHelper.close();
+        db.close();
+        return label;
+    }
 }

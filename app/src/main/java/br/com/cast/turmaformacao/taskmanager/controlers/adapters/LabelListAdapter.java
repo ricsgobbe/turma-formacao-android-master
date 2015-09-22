@@ -25,6 +25,11 @@ public class LabelListAdapter extends BaseAdapter {
         this.context = activity;
         this.labels = labels;
     }
+    public LabelListAdapter(Activity activity, Label labels) {
+        super();
+        this.context = activity;
+        this.labels.add(labels);
+    }
 
     @Override
     public int getCount() {

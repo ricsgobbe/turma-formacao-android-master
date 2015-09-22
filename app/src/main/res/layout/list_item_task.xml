@@ -3,12 +3,12 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="72dp">
 
-    <TextView
-        android:id="@+id/taskListId"
+    <View
+        android:id="@+id/viewTaskColor"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="2"
-        android:gravity="center"/>
+        android:layout_weight="2"/>
+
     <TextView
         android:id="@+id/taskListNome"
         android:layout_width="0dp"
