@@ -6,6 +6,7 @@ import android.database.Cursor;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.cast.turmaformacao.taskmanager.model.entidade.Label;
 import br.com.cast.turmaformacao.taskmanager.model.entidade.Task;
 
 /**
@@ -17,8 +18,9 @@ public final class TaskContract {
     public static final String ID = "id";
     public static final String NAME = "name";
     public static final String DESCRIPTION = "description";
+    public static final String LABEL = "label";
 
-    public static final String[] COLUNS = {ID, NAME, DESCRIPTION};
+    public static final String[] COLUNS = {ID, NAME, DESCRIPTION, LABEL};
 
     private TaskContract() {
         super();
@@ -31,7 +33,8 @@ public final class TaskContract {
         create.append(" ( ");
         create.append(ID + " INTEGER PRIMARY KEY, ");
         create.append(NAME + " TEXT NOT NULL, ");
-        create.append(DESCRIPTION + " TEXT ");
+        create.append(DESCRIPTION + " TEXT, ");
+        create.append(LABEL + " LONG NOT NULL");
         create.append(" ); ");
 
         return create.toString();
@@ -43,6 +46,7 @@ public final class TaskContract {
         values.put(TaskContract.ID, task.getId());
         values.put(TaskContract.NAME, task.getNome());
         values.put(TaskContract.DESCRIPTION, task.getDescription());
+        values.put(TaskContract.LABEL, task.getLabel().getId());
         return values;
     }
 
@@ -54,6 +58,9 @@ public final class TaskContract {
             task.setDescription(cursor.getString(cursor.getColumnIndex(TaskContract.DESCRIPTION)));
             task.setNome(cursor.getString(cursor.getColumnIndex(TaskContract.NAME)));
 
+            Label label = new Label();
+            label.setId(cursor.getLong(cursor.getColumnIndex(TaskContract.LABEL)));
+            task.setLabel(label);
             return task;
         }
         return null;

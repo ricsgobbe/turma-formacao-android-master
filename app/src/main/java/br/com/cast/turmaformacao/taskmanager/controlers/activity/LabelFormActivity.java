@@ -92,7 +92,6 @@ public class LabelFormActivity extends AppCompatActivity {
     private void updateColor(Color item) {
         viewColor.setBackgroundColor(android.graphics.Color.parseColor(item.getHex()));
         label.setColor(item);
-
     }
 
 

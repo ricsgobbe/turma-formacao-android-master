@@ -13,6 +13,7 @@ public class Task implements Parcelable {
     private Long id;
     private String nome;
     private String description;
+    private Label label;
 
 
     public Task() {
@@ -49,6 +50,14 @@ public class Task implements Parcelable {
         this.description = description;
     }
 
+    public Label getLabel() {
+        return label;
+    }
+
+    public void setLabel(Label label) {
+        this.label = label;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -58,7 +67,9 @@ public class Task implements Parcelable {
 
         if (id != null ? !id.equals(task.id) : task.id != null) return false;
         if (nome != null ? !nome.equals(task.nome) : task.nome != null) return false;
-        return !(description != null ? !description.equals(task.description) : task.description != null);
+        if (description != null ? !description.equals(task.description) : task.description != null)
+            return false;
+        return !(label != null ? !label.equals(task.label) : task.label != null);
 
     }
 
@@ -67,6 +78,7 @@ public class Task implements Parcelable {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (nome != null ? nome.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (label != null ? label.hashCode() : 0);
         return result;
     }
 
@@ -76,6 +88,7 @@ public class Task implements Parcelable {
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", description='" + description + '\'' +
+                ", label=" + label.toString() +
                 '}';
     }
 
@@ -104,6 +117,7 @@ public class Task implements Parcelable {
 
         nome = imp.readString();
         description = imp.readString();
+
     }
 
     /*cria ou um array de task ou um task*/

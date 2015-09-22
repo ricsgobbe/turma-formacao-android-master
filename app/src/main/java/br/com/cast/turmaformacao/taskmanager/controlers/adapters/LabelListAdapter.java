@@ -46,8 +46,8 @@ public class LabelListAdapter extends BaseAdapter {
         View labelListView = context.getLayoutInflater().inflate(R.layout.list_item_label, parent, false);
         Label label = getItem(position);
 
-        TextView textViewTarefa = (TextView)labelListView.findViewById(R.id.taskListNome);
-        textViewTarefa.setText(label.getName().toString());
+        TextView taskListNome = (TextView)labelListView.findViewById(R.id.taskListNome);
+        taskListNome.setText(label.getName().toString());
 
         View tarefa = labelListView.findViewById(R.id.viewTarefa);
         tarefa.setBackgroundColor(android.graphics.Color.parseColor(label.getColor().getHex()));
@@ -56,5 +56,10 @@ public class LabelListAdapter extends BaseAdapter {
         //View viewById =  view.findViewById(R.id.list_colors);
 
         return labelListView;
+    }
+
+    public void setItens(List<Label> itens) {
+        labels.clear();
+        labels.addAll(itens);
     }
 }

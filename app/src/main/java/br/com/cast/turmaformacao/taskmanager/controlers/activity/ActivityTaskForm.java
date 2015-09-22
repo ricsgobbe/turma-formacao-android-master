@@ -48,6 +48,7 @@ public class ActivityTaskForm extends AppCompatActivity {
 
     }
 
+
     @Override
     protected void onResume() {
         update();
@@ -57,16 +58,15 @@ public class ActivityTaskForm extends AppCompatActivity {
 
     private void update() {
         List<Label> labels = LabelBusinessServices.findAll();
-        LabelListAdapter labelAdapter = new LabelListAdapter(ActivityTaskForm.this, labels);
-        spinner.setAdapter(labelAdapter);
+        LabelListAdapter labelAdapter = (LabelListAdapter) spinner.getAdapter();
+        labelAdapter.setItens(labels);
         labelAdapter.notifyDataSetChanged();
     }
 
     private void bindSpinner() {
-        List<Label> label = LabelBusinessServices.findAll();
         spinner = (Spinner) findViewById(R.id.spinnerTaskForm);
+        List<Label>  label = LabelBusinessServices.findAll();
         spinner.setAdapter(new LabelListAdapter(ActivityTaskForm.this, label));
-
     }
 
     private void bindButton() {
@@ -96,7 +96,6 @@ public class ActivityTaskForm extends AppCompatActivity {
                    * pois ela serve para todo o ciclo de vida do programa*/
 
             TaskBusinessServices.save(task);
-            Toast.makeText(ActivityTaskForm.this, R.string.msg_save_success, Toast.LENGTH_LONG).show();
             ActivityTaskForm.this.finish();
         }
     }
@@ -104,6 +103,7 @@ public class ActivityTaskForm extends AppCompatActivity {
     private void bindTask() {
         task.setNome(editName.getText().toString());
         task.setDescription(editDesc.getText().toString());
+        task.setLabel((Label)spinner.getSelectedItem());
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {

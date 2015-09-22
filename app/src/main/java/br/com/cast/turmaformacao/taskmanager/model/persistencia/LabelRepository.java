@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.List;
 
 import br.com.cast.turmaformacao.taskmanager.model.entidade.Label;
+import br.com.cast.turmaformacao.taskmanager.model.servicos.LabelBusinessServices;
 
 /**
  * Created by Administrador on 17/09/2015.
@@ -58,6 +59,19 @@ public class LabelRepository {
 
         db.close();
         databaseHelper.close();
+    }
+
+    public static Label getLabel(Long id){
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
+        SQLiteDatabase db = databaseHelper.getReadableDatabase();
+
+        String where = LabelContract.ID + " = ? ";
+        String[] params = {String.valueOf(id)};
+        Cursor cursor = db.query(LabelContract.TABLE, LabelContract.COLUNSLABEL, where, params, null, null, null);
+
+        databaseHelper.close();
+        db.close();
+        return LabelContract.getLabel(cursor);
     }
 
 
