@@ -1,6 +1,7 @@
 package br.com.cast.turmaformacao.taskmanager.controlers.adapters;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -48,7 +49,6 @@ public class ColorListAdapter extends BaseAdapter {
         View colorView = context.getLayoutInflater().inflate(R.layout.list_item_color, parent, false);
         int cor;
         cor = android.graphics.Color.parseColor(color.getHex());
-
         colorView.findViewById(R.id.viewColor);
         colorView.setBackgroundColor(cor);
         return colorView;

@@ -3,11 +3,14 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="72dp">
 
-    <View
+    <ImageView
         android:id="@+id/viewTaskColor"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="2"/>
+        android:layout_weight="2"
+        android:src="@drawable/circulo"
+        android:padding="25dp"
+        />
 
     <TextView
         android:id="@+id/taskListNome"

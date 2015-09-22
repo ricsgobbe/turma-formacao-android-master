@@ -25,26 +25,26 @@ public enum Color {
     GREY("#9e9e9e"),
     BLUE_GREY("#607d8b"),
     BLACK("#000000"),
-    WHITE("#ffffff");
+    WHITE("#ffffff")
+    ;
 
     private String hex;
 
-    private Color(String hex) {
+    private Color(String hex){
         this.hex = hex;
     }
+
 
 
     public String getHex() {
         return hex;
     }
-
-    /*Verifica se o valor passado por parametro existe na listade enuns, no caso colors vai conter os valores*/
-    public static Color getInstancia(String hex) {
+/*Verifica se o valor passado por parametro existe na listade enuns, no caso colors vai conter os valores*/
+    public static Color getInstancia(String hex){
         Color[] colors = values();
-        for (Color c : colors) {
-            if (c.getHex().equals(hex)) {
+        for(Color c : colors){
+            if(c.getHex().equals(hex))
                 return c;
-            }
         }
         return null;
     }

@@ -108,6 +108,7 @@ public class Task implements Parcelable {
         dest.writeLong(id == null ? -1 : id);
         dest.writeString(nome == null ? "" : nome);
         dest.writeString(description == null ? "" : description);
+        dest.writeParcelable(label, flags);
     }
 
     /*retorna um void readFromPaRcel, deve ser colocado na mesma posicao qqd foi escrito, pouis ele sabe a posicao, apenas*/
@@ -117,6 +118,7 @@ public class Task implements Parcelable {
 
         nome = imp.readString();
         description = imp.readString();
+        label = imp.readParcelable(Label.class.getClassLoader());
 
     }
 

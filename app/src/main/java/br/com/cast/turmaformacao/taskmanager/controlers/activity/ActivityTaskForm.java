@@ -58,6 +58,7 @@ public class ActivityTaskForm extends AppCompatActivity {
 
     private void update() {
         List<Label> labels = LabelBusinessServices.findAll();
+        spinner.setSelection(labels.indexOf(task.getLabel()));
         LabelListAdapter labelAdapter = (LabelListAdapter) spinner.getAdapter();
         labelAdapter.setItens(labels);
         labelAdapter.notifyDataSetChanged();
