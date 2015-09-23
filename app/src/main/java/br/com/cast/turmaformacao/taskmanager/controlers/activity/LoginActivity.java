@@ -1,6 +1,7 @@
 package br.com.cast.turmaformacao.taskmanager.controlers.activity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -12,10 +13,10 @@ import android.widget.EditText;
 import java.util.List;
 
 import br.com.cast.turmaformacao.taskmanager.R;
+import br.com.cast.turmaformacao.taskmanager.model.entidade.Address;
 import br.com.cast.turmaformacao.taskmanager.model.entidade.User;
+import br.com.cast.turmaformacao.taskmanager.model.http.AddressServices;
 import br.com.cast.turmaformacao.taskmanager.model.persistencia.UserRepository;
-import br.com.cast.turmaformacao.taskmanager.model.servicos.UserBusinessServices;
-import br.com.cast.turmaformacao.taskmanager.util.FormHelp;
 
 /**
  * Created by Administrador on 14/09/2015.
@@ -36,6 +37,27 @@ public class LoginActivity extends AppCompatActivity {
         bindEditTextPassword();
         bindButtonLogin();
 
+       new GetAddressTask().execute("14801030");
+
+    }
+
+
+    private class GetAddressTask extends AsyncTask<String, Void, Address>{
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Address doInBackground(String... params) {
+            return AddressServices.getAddresByZipCode(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Address address) {
+            super.onPostExecute(address);
+        }
     }
 
     private void iniUser() {
