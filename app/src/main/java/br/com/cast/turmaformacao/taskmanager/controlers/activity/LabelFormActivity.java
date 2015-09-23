@@ -57,6 +57,7 @@ public class LabelFormActivity extends AppCompatActivity {
 
    private void bindView() {
        viewColor = findViewById(R.id.view_color);
+
        /*colors.add(Color.getInstancia("#03A9F4"));
        ArrayAdapter<Color> colorArrayAdapter = new ArrayAdapter<Color>(this, R.layout.list_item_color, colors);
        spinerColor.setAdapter(colorArrayAdapter);*/
@@ -101,7 +102,9 @@ public class LabelFormActivity extends AppCompatActivity {
             LabelBusinessServices.save(label);
             finish();
         }
+
     }
+
 
     private void bindLabel() {
         label.setName(editName.getText().toString());

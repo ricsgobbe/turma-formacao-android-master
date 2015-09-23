@@ -106,10 +106,7 @@ public class TaskListActivity extends AppCompatActivity {
         goToTaskForm.putExtra(ActivityTaskForm.PARAM_TASK, selectedTask);
         startActivity(goToTaskForm);
     }
-
-    private void onDeleteClick() {
-        TaskBusinessServices.delete(selectedTask);
-    }
+    
 
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_task_list, menu);
