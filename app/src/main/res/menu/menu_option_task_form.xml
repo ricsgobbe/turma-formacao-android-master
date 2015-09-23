@@ -6,6 +6,6 @@
         android:id="@+id/menu_addTask"
         android:title="@string/string_addTask"
         app:showAsAction="always"
-        android:icon="@mipmap/ic_action_content_add"/>
+        android:icon="@mipmap/ic_action_action_done"/>
 
 </menu>

@@ -93,6 +93,31 @@ public class Label implements Parcelable {
             return new Label[size];
         }
     };
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Label label = (Label) o;
+
+        if (id != null ? !id.equals(label.id) : label.id != null) return false;
+        if (name != null ? !name.equals(label.name) : label.name != null) return false;
+        if (description != null ? !description.equals(label.description) : label.description != null)
+            return false;
+        return color == label.color;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (color != null ? color.hashCode() : 0);
+        return result;
+    }
 }
 
 

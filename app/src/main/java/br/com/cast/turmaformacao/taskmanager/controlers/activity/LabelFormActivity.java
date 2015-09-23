@@ -96,7 +96,7 @@ public class LabelFormActivity extends AppCompatActivity {
 
 
     private void onMenuAddClick() {
-        if(!FormHelp.validateRequired("erro", editName)){
+        if(!FormHelp.validateRequired("erro", editName) && label.getColor() != null){
             bindLabel();
             LabelBusinessServices.save(label);
             finish();

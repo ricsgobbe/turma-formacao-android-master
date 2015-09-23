@@ -1,8 +1,10 @@
 package br.com.cast.turmaformacao.taskmanager.util;
 
+import android.view.View;
 import android.widget.EditText;
 
 import br.com.cast.turmaformacao.taskmanager.R;
+import br.com.cast.turmaformacao.taskmanager.model.entidade.Label;
 
 /**
  * Created by Administrador on 15/09/2015.
