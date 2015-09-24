@@ -1,53 +1,57 @@
 package br.com.cast.turmaformacao.taskmanager.model.http;
 
-
 import android.util.Log;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import br.com.cast.turmaformacao.taskmanager.model.entidade.Address;
+import com.fasterxml.jackson.databind.type.CollectionType;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+
+import br.com.cast.turmaformacao.taskmanager.model.entidade.Address;
+import br.com.cast.turmaformacao.taskmanager.model.entidade.Task;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
- * Created by Administrador on 23/09/2015.
+ * Created by Administrador on 24/09/2015.
  */
-public final  class AddressServices {
+public final class TaskServices {
 
-    private static final String URL = "http://correiosapi.apphb.com/cep/";
+    private static final String URL = "http://10.11.21.193:3000/api/v1/";
 
-    private AddressServices() {
+    public TaskServices() {
         super();
     }
 
-    public static Address getAddresByZipCode(String zipCode){
-        Address adress = null;
+    public static List<Task> getTaskById(String id){
+        List<Task> task = new ArrayList<>();
         try {
-            /*configura a requisicao*/
-            URL url = new URL(URL + zipCode);
+            URL url = new URL(URL + id);
             final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "application/json");
             /*exec requisicao*/
             int responseCode = conn.getResponseCode();
-            Log.i("getAddressByZipCode", "Codigo de retorno da requisicao de cep" + responseCode);
+            Log.i("getTaskById", "Codigo de retorno da requisicao da task: " + responseCode);
             if(responseCode == HttpURLConnection.HTTP_OK){
                 /*Trabalha com envio e recebimento de arquivo, ou seja, manipulacao de arquivo*/
                 InputStream inputStream = conn.getInputStream();
                 /*Converter o inputStream para Json*/
                 /*biblioteca raiz, que pegara o Json*/
                 ObjectMapper objectMapper = new ObjectMapper();
-                adress = objectMapper.readValue(inputStream, Address.class);
-
+                CollectionType collectionType = objectMapper.getTypeFactory().constructCollectionType(List.class, Task.class);
+                task = objectMapper.readValue(inputStream, collectionType);
 
             }
-
         } catch (Exception e) {
-            /*msg do logcat*/
-            Log.e(AddressServices.class.getName(), e.getMessage());
+           e.printStackTrace();
         }
-        return adress;
+        return task;
     }
-
 }

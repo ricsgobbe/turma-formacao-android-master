@@ -1,6 +1,7 @@
 package br.com.cast.turmaformacao.taskmanager.controlers.activity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -17,8 +18,10 @@ import java.util.List;
 import br.com.cast.turmaformacao.taskmanager.R;
 import br.com.cast.turmaformacao.taskmanager.controlers.adapters.ColorListAdapter;
 import br.com.cast.turmaformacao.taskmanager.controlers.adapters.LabelListAdapter;
+import br.com.cast.turmaformacao.taskmanager.controlers.adapters.TaskListAdapter;
 import br.com.cast.turmaformacao.taskmanager.model.entidade.Label;
 import br.com.cast.turmaformacao.taskmanager.model.entidade.Task;
+import br.com.cast.turmaformacao.taskmanager.model.http.TaskServices;
 import br.com.cast.turmaformacao.taskmanager.model.servicos.LabelBusinessServices;
 import br.com.cast.turmaformacao.taskmanager.model.servicos.TaskBusinessServices;
 import br.com.cast.turmaformacao.taskmanager.util.FormHelp;
@@ -45,8 +48,12 @@ public class ActivityTaskForm extends AppCompatActivity {
         bindTextName();
         bindTextDesc();
         bindSpinner();
+             }
 
-    }
+
+
+
+
 
 
     @Override
@@ -97,7 +104,6 @@ public class ActivityTaskForm extends AppCompatActivity {
             bindTask();
                    /*Por manipular arquivo, deve-se usar o getApplication, pq se a activity morrer, o conteudo estara vivo
                    * pois ela serve para todo o ciclo de vida do programa*/
-
             TaskBusinessServices.save(task);
             ActivityTaskForm.this.finish();
         }
@@ -106,7 +112,8 @@ public class ActivityTaskForm extends AppCompatActivity {
     private void bindTask() {
         task.setNome(editName.getText().toString());
         task.setDescription(editDesc.getText().toString());
-        task.setLabel((Label)spinner.getSelectedItem());
+        task.setLabel((Label) spinner.getSelectedItem());
+        task.setWeb_id((long) 1);
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {

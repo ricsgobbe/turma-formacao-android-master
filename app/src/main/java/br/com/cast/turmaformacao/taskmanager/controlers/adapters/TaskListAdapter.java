@@ -58,13 +58,16 @@ public class TaskListAdapter extends BaseAdapter {
         Task task = getItem(position);
         View taskListView = contexto.getLayoutInflater().inflate(R.layout.list_item_task, parent, false);
 
-        ImageView color = (ImageView) taskListView.findViewById(R.id.viewTaskColor);
-        color.setImageTintList(ColorStateList.valueOf(android.graphics.Color.parseColor(task.getLabel().getColor().getHex())));
+        if(task.getLabel() != null) {
+            ImageView color = (ImageView) taskListView.findViewById(R.id.viewTaskColor);
+            color.setImageTintList(ColorStateList.valueOf(android.graphics.Color.parseColor(task.getLabel().getColor().getHex())));
+        }
+            TextView textViewNome = (TextView) taskListView.findViewById(R.id.taskListNome);
+            textViewNome.setText(task.getNome().toString());
 
-        TextView textViewNome = (TextView)taskListView.findViewById(R.id.taskListNome);
-        textViewNome.setText(task.getNome().toString());
+            TextView textViewDesc = (TextView) taskListView.findViewById(R.id.taskListDesc);
+            textViewDesc.setText(task.getDescription().toString());
 
-
-        return taskListView;
+            return taskListView;
     }
 }

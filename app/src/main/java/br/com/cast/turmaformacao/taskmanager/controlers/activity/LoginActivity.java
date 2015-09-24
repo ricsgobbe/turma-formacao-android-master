@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         bindEditTextPassword();
         bindButtonLogin();
 
-       new GetAddressTask().execute("14801030");
+      // new GetAddressTask().execute("14801030");
 
     }
 

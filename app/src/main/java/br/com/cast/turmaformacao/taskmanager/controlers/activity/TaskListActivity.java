@@ -3,6 +3,7 @@ package br.com.cast.turmaformacao.taskmanager.controlers.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
@@ -18,6 +19,8 @@ import java.util.List;
 import br.com.cast.turmaformacao.taskmanager.R;
 import br.com.cast.turmaformacao.taskmanager.controlers.adapters.TaskListAdapter;
 import br.com.cast.turmaformacao.taskmanager.model.entidade.Task;
+import br.com.cast.turmaformacao.taskmanager.model.http.TaskServices;
+import br.com.cast.turmaformacao.taskmanager.model.persistencia.TaskContract;
 import br.com.cast.turmaformacao.taskmanager.model.servicos.TaskBusinessServices;
 
 /**
@@ -33,7 +36,6 @@ public class TaskListActivity extends AppCompatActivity {
 
 
         bindTaskList();
-
 
     }
 
@@ -51,6 +53,35 @@ public class TaskListActivity extends AppCompatActivity {
         });
     }
 
+
+
+    public class GetTaskById extends AsyncTask<String, Void, List<Task>> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected List<Task> doInBackground(String... params) {
+            return TaskServices.getTaskById(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(List<Task> tasks) {
+            super.onPostExecute(tasks);
+            TaskListAdapter adapter = (TaskListAdapter) listViewTaskList.getAdapter();
+            adapter.setDataValues(tasks);
+            for(Task t : tasks){
+                TaskBusinessServices.save(t);
+            }
+            adapter.notifyDataSetChanged();
+
+        }
+    }
+
+
+
     protected void onResume() {
         updateTaskList();
         super.onResume();
@@ -60,6 +91,7 @@ public class TaskListActivity extends AppCompatActivity {
         List<Task> values = TaskBusinessServices.findAll();
         listViewTaskList.setAdapter(new TaskListAdapter(this, values));
         TaskListAdapter adapter = (TaskListAdapter) listViewTaskList.getAdapter();
+        updateTaskList();
         adapter.notifyDataSetChanged();
     }
 
@@ -70,8 +102,15 @@ public class TaskListActivity extends AppCompatActivity {
             case R.id.menu_add:
                 onMenuAddClick();
                 break;
+            case R.id.menu_update:
+                onMenuUpdate();
+                break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void onMenuUpdate() {
+        new GetTaskById().execute("task");
     }
 
     private void onMenuAddClick() {

@@ -16,6 +16,13 @@
         android:id="@+id/taskListNome"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="8"
+        android:layout_weight="4"
+        android:gravity="start|center"/>
+
+    <TextView
+        android:id="@+id/taskListDesc"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
         android:gravity="start|center"/>
 </LinearLayout>

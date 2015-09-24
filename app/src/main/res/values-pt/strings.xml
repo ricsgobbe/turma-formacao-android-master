@@ -26,5 +26,14 @@
     <string name="lbl_confirm_delete">Deseja excluir ?</string>>
     <string name="lbl_yes">yes</string>
     <string name="string_addTask">Adicionar</string>
-    <string name="string_user">User</string>>
+    <string name="string_user">User</string>
+    <string name="string_zipCode">CEP</string>
+    <string name="string_address">Endereço</string>>
+    <string name="string_type_street">Tipo Logradouro</string>
+    <string name="string_street_login">Logradouro</string>
+    <string name="string_number">Numero</string>
+    <string name="string_neghtborhood">Bairro</string>
+    <string name="string_city">Cidade</string>>
+    <string name="string_state">Estado</string>
+    <string name="string_update">Update</string>>
 </resources>

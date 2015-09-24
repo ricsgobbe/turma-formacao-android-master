@@ -3,6 +3,8 @@ package br.com.cast.turmaformacao.taskmanager.model.entidade;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 
 /**
@@ -10,8 +12,12 @@ import java.io.Serializable;
  */
 public class Task implements Parcelable {
     /*serializa a classe, permitindo passar bit a bit*/
-    private Long id;
+    private Long _id;
+    @JsonProperty("id")
+    private Long web_id;
+    @JsonProperty("name")
     private String nome;
+    @JsonProperty("description")
     private String description;
     private Label label;
 
@@ -27,11 +33,19 @@ public class Task implements Parcelable {
 
 
     public Long getId() {
-        return id;
+        return _id;
     }
 
     public void setId(long id) {
-        this.id = id;
+        this._id = id;
+    }
+
+    public Long getWeb_id() {
+        return web_id;
+    }
+
+    public void setWeb_id(Long web_id) {
+        this.web_id = web_id;
     }
 
     public String getNome() {
@@ -65,7 +79,8 @@ public class Task implements Parcelable {
 
         Task task = (Task) o;
 
-        if (id != null ? !id.equals(task.id) : task.id != null) return false;
+        if (_id != null ? !_id.equals(task._id) : task._id != null) return false;
+        if (web_id != null ? !web_id.equals(task.web_id) : task.web_id != null) return false;
         if (nome != null ? !nome.equals(task.nome) : task.nome != null) return false;
         if (description != null ? !description.equals(task.description) : task.description != null)
             return false;
@@ -75,7 +90,8 @@ public class Task implements Parcelable {
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
+        int result = _id != null ? _id.hashCode() : 0;
+        result = 31 * result + (web_id != null ? web_id.hashCode() : 0);
         result = 31 * result + (nome != null ? nome.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (label != null ? label.hashCode() : 0);
@@ -85,15 +101,15 @@ public class Task implements Parcelable {
     @Override
     public String toString() {
         return "Task{" +
-                "id=" + id +
+                "_id=" + _id +
+                ", web_id=" + web_id +
                 ", nome='" + nome + '\'' +
                 ", description='" + description + '\'' +
-                ", label=" + label.toString() +
+                ", label=" + label +
                 '}';
     }
 
-
-    /*Metodos parcelable*/
+  /*Metodos parcelable*/
 
 
     /**/
@@ -105,16 +121,20 @@ public class Task implements Parcelable {
     /*Escrita do objeto para o parcelable !*/
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(id == null ? -1 : id);
+        dest.writeLong(_id == null ? -1 : _id);
         dest.writeString(nome == null ? "" : nome);
         dest.writeString(description == null ? "" : description);
         dest.writeParcelable(label, flags);
+        dest.writeLong(web_id == null ? -1 : web_id);
     }
 
     /*retorna um void readFromPaRcel, deve ser colocado na mesma posicao qqd foi escrito, pouis ele sabe a posicao, apenas*/
     public void readFromParcel(Parcel imp) {
-        id = imp.readLong();
-        id = id == null ? -1 : id;
+        _id = imp.readLong();
+        _id = _id == null ? -1 : _id;
+
+        web_id = imp.readLong();
+        web_id = web_id == null ? -1 : web_id;
 
         nome = imp.readString();
         description = imp.readString();

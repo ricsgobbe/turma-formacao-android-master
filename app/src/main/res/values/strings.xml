@@ -31,5 +31,14 @@
     <string name="string_password_user">password</string>
     <string name="string_sign_in">Sign in</string>
     <string name="string_create">create</string>
-    <string name="string_user_add">User add</string>>
+    <string name="string_user_add">User add</string>
+    <string name="string_zipCode">CEP</string>
+    <string name="string_address">Endereço</string>
+    <string name="string_street_login">Street</string>
+    <string name="string_type_street">Tipo Logradouro</string>
+    <string name="string_number">Numero</string>
+    <string name="string_neghtborhood">Bairro</string>
+    <string name="string_city">Cidade</string>
+    <string name="string_state">Estado</string>
+    <string name="string_update">Update</string>>
 </resources>
